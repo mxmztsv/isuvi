@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import {useRoutes} from "./routes";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Toaster} from "react-hot-toast"
+import {useAuthContext} from "./context/AuthContext";
+import {useEffect} from "react";
+import {Box, CssVarsProvider} from "@mui/joy";
+import {Sidebar} from "./components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const {userData} = useAuthContext()
+
+	const routes = useRoutes(userData)
+
+	// useEffect(() => {
+	// 	console.log('userData', userData)
+	// }, [userData]);
+
+
+	return (
+		<Box sx={{display: "flex", flexDirection: 'row', width: '100%'}}>
+			<Toaster
+				position="bottom-left"
+				reverseOrder={false}
+			/>
+			<Router>
+				<Sidebar/>
+				<CssVarsProvider>
+					{routes}
+				</CssVarsProvider>
+			</Router>
+		</Box>
+	);
 }
 
 export default App;
