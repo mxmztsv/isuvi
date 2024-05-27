@@ -83,24 +83,25 @@ export const AuthPage = () => {
 							</FormControl>
 						)}
 					/>
-					{/*<FormControl>*/}
-					{/*	<FormLabel>Логин</FormLabel>*/}
-					{/*	<Input*/}
-					{/*		// html input attribute*/}
-					{/*		name="email"*/}
-					{/*		type="email"*/}
-					{/*		placeholder="johndoe@email.com"*/}
-					{/*	/>*/}
-					{/*</FormControl>*/}
-					<FormControl>
-						<FormLabel>Пароль</FormLabel>
-						<Input
-							// html input attribute
-							name="password"
-							type="password"
-							placeholder="password"
-						/>
-					</FormControl>
+					<Controller
+						name={"password"}
+						required
+						fullWidth
+						control={control}
+						render={({field: {onChange, value}}) => (
+							<FormControl>
+								<FormLabel>Пароль</FormLabel>
+								<Input
+									// html input attribute
+									onChange={onChange}
+									value={value}
+									name="password"
+									type="password"
+									placeholder="password"
+								/>
+							</FormControl>
+						)}
+					/>
 					<Button sx={{mt: 1 /* margin top */}} type="submit">Войти</Button>
 				</Box>
 			</Sheet>

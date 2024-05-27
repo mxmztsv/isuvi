@@ -56,7 +56,7 @@ function RowMenu() {
 	);
 }
 
-export const OrderTable = ({rows}) => {
+export const OrderTable = ({rows, handleOpenEditModal}) => {
 	const [order, setOrder] = React.useState('desc');
 	const [selected, setSelected] = React.useState([]);
 	const [open, setOpen] = React.useState(false);
@@ -162,7 +162,7 @@ export const OrderTable = ({rows}) => {
 							</td>
 							<td>
 								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyItems: 'end', width: '100%'}}>
-									<IconButton variant="soft" color="primary" size="sm">
+									<IconButton variant="soft" color="primary" size="sm" onClick={() => {handleOpenEditModal(row.cataclysm.id)}}>
 										<EditRoundedIcon/>
 									</IconButton>
 								</Box>

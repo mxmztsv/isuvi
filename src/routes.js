@@ -11,9 +11,9 @@ export const useRoutes = (userData) => {
 	if (!userData) {
 		return (
 			<Routes>
-				<Route path="/" element={<AuthPage/>}/>
+				{/*<Route path="/" element={<AuthPage/>}/>*/}
 				<Route path="/tasks" element={<TasksPage/>}/>
-				<Route path="*" element={<Navigate to="/" replace/>}/>
+				<Route path="*" element={<Navigate to="/tasks" replace/>}/>
 			</Routes>
 		)
 	}

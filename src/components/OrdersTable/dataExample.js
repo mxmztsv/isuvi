@@ -61,7 +61,7 @@ export const orders = [
 	},
 ];
 
-export const tasks = [
+export const tasksStub = [
 	{
 		"id": 1,
 		"description": "Тестовое описание",
@@ -75,7 +75,7 @@ export const tasks = [
 			}
 		},
 		"cataclysm": {
-			"id": 1,
+			"id": 2,
 			"place": "Санкт-Петербург",
 			"time": "12:30:23",
 			"description": "Описание катаклизма",
@@ -93,7 +93,7 @@ export const tasks = [
 		"id": 2,
 		"description": "Тестовое описание",
 		"executor": {
-			"id": 1,
+			"id": 3,
 			"login": "test_login",
 			"name": "Юрий",
 			"role": {
@@ -102,7 +102,7 @@ export const tasks = [
 			}
 		},
 		"cataclysm": {
-			"id": 1,
+			"id": 4,
 			"place": "Санкт-Петербург",
 			"time": "12:30:23",
 			"description": "Описание катаклизма",
@@ -120,7 +120,7 @@ export const tasks = [
 		"id": 3,
 		"description": "Тестовое описание",
 		"executor": {
-			"id": 1,
+			"id": 15,
 			"login": "test_login",
 			"name": "Юрий",
 			"role": {
@@ -129,7 +129,7 @@ export const tasks = [
 			}
 		},
 		"cataclysm": {
-			"id": 1,
+			"id": 156,
 			"place": "Санкт-Петербург",
 			"time": "12:30:23",
 			"description": "Описание катаклизма",
@@ -147,7 +147,7 @@ export const tasks = [
 		"id": 4,
 		"description": "Тестовое описание",
 		"executor": {
-			"id": 1,
+			"id": 561,
 			"login": "test_login",
 			"name": "Юрий",
 			"role": {
@@ -156,7 +156,7 @@ export const tasks = [
 			}
 		},
 		"cataclysm": {
-			"id": 1,
+			"id": 1123,
 			"place": "Санкт-Петербург",
 			"time": "12:30:23",
 			"description": "Описание катаклизма",
