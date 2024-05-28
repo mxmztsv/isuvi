@@ -75,8 +75,12 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 	}
 
 	const handleOpen = async (id) => {
-		setOpen(true)
-		setSelectedCataclysmId(id)
+		if (!freeAgents.length) {
+			toast.error('Все агенты заняты, попробуйте позже')
+		} else {
+			setOpen(true)
+			setSelectedCataclysmId(id)
+		}
 	}
 
 	const fetchFreeAgents = async () => {
@@ -84,6 +88,7 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 		// 	setFreeAgents(data)
 		// })
 		setFreeAgents(freeAgentsStub)
+		// setFreeAgents([])
 	}
 
 
