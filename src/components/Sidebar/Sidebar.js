@@ -21,42 +21,161 @@ import PrecisionManufacturingRoundedIcon from '@mui/icons-material/PrecisionManu
 import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
 import {Link} from "@mui/joy";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useHttp} from "../../hooks/http.hook";
+import {useAuthContext} from "../../context/AuthContext";
 
 // import ColorSchemeToggle from './ColorSchemeToggle';
 // import {closeSidebar} from '../utils';
 
-const pages = [
-	{
-		title: "Задания",
-		icon: <AssignmentRoundedIcon/>,
-		link: "/tasks"
-	},
-	{
-		title: "Катаклизмы",
-		icon: <SyncProblemRoundedIcon/>,
-		link: "/"
-	},
-	{
-		title: "Станок",
-		icon: <PrecisionManufacturingRoundedIcon/>,
-		link: "/"
-	},
-	{
-		title: "Пользователи",
-		icon: <PeopleOutlineRoundedIcon/>,
-		link: "/"
-	},
-];
+// const pages = [
+// 	{
+// 		title: "Задания",
+// 		icon: <AssignmentRoundedIcon/>,
+// 		link: "/tasks"
+// 	},
+// 	{
+// 		title: "Задания (менеджер)",
+// 		icon: <AssignmentRoundedIcon/>,
+// 		link: "/tasks-management"
+// 	},
+// 	{
+// 		title: "Катаклизмы",
+// 		icon: <SyncProblemRoundedIcon/>,
+// 		link: "/cataclysms"
+// 	},
+// 	{
+// 		title: "Станок",
+// 		icon: <PrecisionManufacturingRoundedIcon/>,
+// 		link: "/machine"
+// 	},
+// 	{
+// 		title: "Пользователи",
+// 		icon: <PeopleOutlineRoundedIcon/>,
+// 		link: "/users"
+// 	},
+// ];
+
+export const ROLES_TO_PAGES = {
+	1: [
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks"
+		},
+	],
+	2: [
+		{
+			title: "Катаклизмы",
+			icon: <SyncProblemRoundedIcon/>,
+			link: "/cataclysms"
+		},
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks"
+		},
+	],
+	3: [
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks-management"
+		},
+		{
+			title: "Катаклизмы",
+			icon: <SyncProblemRoundedIcon/>,
+			link: "/cataclysms"
+		},
+	],
+	4: [
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks"
+		},
+	],
+	5: [
+		{
+			title: "Станок",
+			icon: <PrecisionManufacturingRoundedIcon/>,
+			link: "/machine"
+		},
+	],
+	6: [
+		{
+			title: "Пользователи",
+			icon: <PeopleOutlineRoundedIcon/>,
+			link: "/users"
+		},
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks-management"
+		},
+		{
+			title: "Катаклизмы",
+			icon: <SyncProblemRoundedIcon/>,
+			link: "/cataclysms"
+		},
+		{
+			title: "Станок",
+			icon: <PrecisionManufacturingRoundedIcon/>,
+			link: "/machine"
+		},
+	],
+	7: [
+		{
+			title: "Пользователи",
+			icon: <PeopleOutlineRoundedIcon/>,
+			link: "/users"
+		},
+		{
+			title: "Задания",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks"
+		},
+		{
+			title: "Задания (менеджер)",
+			icon: <AssignmentRoundedIcon/>,
+			link: "/tasks-management"
+		},
+		{
+			title: "Катаклизмы",
+			icon: <SyncProblemRoundedIcon/>,
+			link: "/cataclysms"
+		},
+		{
+			title: "Станок",
+			icon: <PrecisionManufacturingRoundedIcon/>,
+			link: "/machine"
+		},
+	],
+};
 
 export const Sidebar = () => {
-	const [selectedPage, setSelectedPage] = useState(pages[0].title);
+	const [selectedPage, setSelectedPage] = useState(null);
+	const [pages, setPages] = useState([]);
 	const navigate = useNavigate()
+	const {request} = useHttp()
+	const {logout, userData} = useAuthContext()
 
 	const handleNavigate = (page) => {
 		setSelectedPage(page.title)
 		navigate(page.link)
 	}
+
+	const logoutHandler = () => {
+		// request('/auth/logout', 'POST').then(() => {
+		logout()
+		// })
+	}
+
+	useEffect(() => {
+		setPages(ROLES_TO_PAGES[userData.user.role.id])
+		setSelectedPage(ROLES_TO_PAGES[userData.user.role.id][0].title)
+	}, [userData]);
+
 
 	return (
 		<Sheet
@@ -142,12 +261,12 @@ export const Sidebar = () => {
 					variant="soft"
 					size="sm"
 					color="primary"
-				>ИП</Avatar>
+				>{userData.user.name.charAt(0)}</Avatar>
 				<Box sx={{minWidth: 0, flex: 1}}>
-					<Typography level="title-sm">Имя Пользователя</Typography>
-					<Typography level="body-xs">Администратор</Typography>
+					<Typography level="title-sm">{userData.user.name}</Typography>
+					<Typography level="body-xs">{userData.user.role.name}</Typography>
 				</Box>
-				<IconButton size="sm" variant="plain" color="neutral">
+				<IconButton size="sm" variant="plain" color="neutral" onClick={logoutHandler}>
 					<LogoutRoundedIcon/>
 				</IconButton>
 			</Box>

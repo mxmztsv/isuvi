@@ -35,9 +35,21 @@ export const AuthPage = () => {
 
 	const onSubmit = async data => {
 		console.log(data)
-		// request('/account/sign-in', 'POST', data).then((userData) => {
+		// request('/auth/login', 'POST', data).then((userData) => {
 		// 	login(userData)
-		// 	toast.success('Вход в аккаунт выполнен')
+			login({
+				accessToken: "string",
+				authToken: "string",
+				user: {
+					"id": 1,
+					"login": "test_login",
+					"name": "Максим",
+					"role": {
+						"id": 7,
+						"name": "Разработчик"
+					}
+				}
+			})
 		// })
 	}
 
@@ -65,7 +77,7 @@ export const AuthPage = () => {
 					</Typography>
 					<Typography level="body-sm">Войдите в аккаунт для продолжения</Typography>
 				</div>
-				<Box component="form" display="flex" flexDirection="column" onSubmit={handleSubmit(onSubmit)}>
+				<Box component="form" display="flex" flexDirection="column" gap={2} onSubmit={handleSubmit(onSubmit)}>
 					<Controller
 						name={"login"}
 						required
@@ -102,7 +114,7 @@ export const AuthPage = () => {
 							</FormControl>
 						)}
 					/>
-					<Button sx={{mt: 1 /* margin top */}} type="submit">Войти</Button>
+					<Button variant="soft" sx={{mt: 1 /* margin top */}} type="submit">Войти</Button>
 				</Box>
 			</Sheet>
 		</Box>

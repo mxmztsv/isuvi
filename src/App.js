@@ -20,11 +20,11 @@ function App() {
 	return (
 		<Box sx={{display: "flex", flexDirection: 'row', width: '100%'}}>
 			<Toaster
-				position="bottom-left"
+				position="bottom-right"
 				reverseOrder={false}
 			/>
 			<Router>
-				<Sidebar/>
+				{userData && <Sidebar/>}
 				<CssVarsProvider>
 					{routes}
 				</CssVarsProvider>

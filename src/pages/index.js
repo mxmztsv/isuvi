@@ -1,2 +1,5 @@
 export * from './AuthPage'
 export * from './TasksPage'
+export * from './UsersPage'
+export * from './CataclysmPage'
+export * from './MachinePage'

@@ -42,7 +42,7 @@ const AuthContext = ({children}) => {
 	const logout = useCallback(() => {
 		setUserData(null)
 		clearLocalStorage()
-		toast.success('Выход из аккаунта')
+		// toast.success('Выход из аккаунта')
 	}, [])
 
 	const update = useCallback(

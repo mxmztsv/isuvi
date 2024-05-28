@@ -35,31 +35,11 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
+import PaidRoundedIcon from '@mui/icons-material/PaidRounded';
 
-function RowMenu() {
-	return (
-		<Dropdown>
-			<MenuButton
-				slots={{root: IconButton}}
-				slotProps={{root: {variant: 'plain', color: 'neutral', size: 'sm'}}}
-			>
-				<MoreHorizRoundedIcon/>
-			</MenuButton>
-			<Menu size="sm" sx={{minWidth: 140}}>
-				<MenuItem>Edit</MenuItem>
-				<MenuItem>Rename</MenuItem>
-				<MenuItem>Move</MenuItem>
-				<Divider/>
-				<MenuItem color="danger">Delete</MenuItem>
-			</Menu>
-		</Dropdown>
-	);
-}
 
-export const OrderTable = ({rows, handleOpenEditModal}) => {
-	const [order, setOrder] = React.useState('desc');
-	const [selected, setSelected] = React.useState([]);
-	const [open, setOpen] = React.useState(false);
+export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 
 	return (
 		<React.Fragment>
@@ -89,13 +69,13 @@ export const OrderTable = ({rows, handleOpenEditModal}) => {
 				>
 					<thead>
 					<tr>
-						<th style={{width: 140, padding: '12px 12px'}}>Статус</th>
-						<th style={{width: 140, padding: '12px 12px'}}>Место</th>
-						<th style={{width: 140, padding: '12px 12px'}}>Время</th>
-						<th style={{width: 240, padding: '12px 12px'}}>Катаклизм</th>
-						<th style={{width: 240, padding: '12px 12px'}}>Исполнитель</th>
-						<th style={{width: 140, padding: '12px 12px'}}>Тип</th>
-						<th style={{width: 120, padding: '12px 12px'}}></th>
+						<th style={{padding: '12px 12px'}}>Статус</th>
+						<th style={{padding: '12px 12px'}}>Место</th>
+						<th style={{padding: '12px 12px'}}>Время</th>
+						<th style={{padding: '12px 12px'}}>Катаклизм</th>
+						<th style={{width: '160px', padding: '12px 12px'}}>Исполнитель</th>
+						<th style={{padding: '12px 12px'}}>Тип</th>
+						<th style={{padding: '12px 12px'}}></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -107,17 +87,23 @@ export const OrderTable = ({rows, handleOpenEditModal}) => {
 									size="sm"
 									startDecorator={
 										{
-											'Выполнено': <CheckRoundedIcon/>,
-											'Активно': <AutorenewRoundedIcon/>,
-											'Провалено': <BlockIcon/>,
-										}[row.status.name]
+											1: <CheckRoundedIcon/>,
+											2: <PersonAddRoundedIcon/>,
+											3: <AutorenewRoundedIcon/>,
+											4: <CheckRoundedIcon/>,
+											5: <BlockIcon/>,
+											6: <PaidRoundedIcon/>,
+										}[row.status.id]
 									}
 									color={
 										{
-											'Выполнено': 'success',
-											'Активно': 'neutral',
-											'Провалено': 'danger',
-										}[row.status.name]
+											1: 'neutral',
+											2: 'warning',
+											3: 'warning',
+											4: 'success',
+											5: 'danger',
+											6: 'success',
+										}[row.status.id]
 									}
 								>
 									{row.status.name}
@@ -161,7 +147,7 @@ export const OrderTable = ({rows, handleOpenEditModal}) => {
 								</Chip>
 							</td>
 							<td>
-								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyItems: 'end', width: '100%'}}>
+								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'end', width: '100%'}}>
 									<IconButton variant="soft" color="primary" size="sm" onClick={() => {handleOpenEditModal(row.cataclysm.id)}}>
 										<EditRoundedIcon/>
 									</IconButton>
@@ -172,49 +158,49 @@ export const OrderTable = ({rows, handleOpenEditModal}) => {
 					</tbody>
 				</Table>
 			</Sheet>
-			<Box
-				className="Pagination-laptopUp"
-				sx={{
-					pt: 2,
-					gap: 1,
-					[`& .${iconButtonClasses.root}`]: {borderRadius: '50%'},
-					display: {
-						xs: 'none',
-						md: 'flex',
-					},
-				}}
-			>
-				<Button
-					size="sm"
-					variant="outlined"
-					color="neutral"
-					startDecorator={<KeyboardArrowLeftIcon/>}
-				>
-					Previous
-				</Button>
+			{/*<Box*/}
+			{/*	className="Pagination-laptopUp"*/}
+			{/*	sx={{*/}
+			{/*		pt: 2,*/}
+			{/*		gap: 1,*/}
+			{/*		[`& .${iconButtonClasses.root}`]: {borderRadius: '50%'},*/}
+			{/*		display: {*/}
+			{/*			xs: 'none',*/}
+			{/*			md: 'flex',*/}
+			{/*		},*/}
+			{/*	}}*/}
+			{/*>*/}
+			{/*	<Button*/}
+			{/*		size="sm"*/}
+			{/*		variant="outlined"*/}
+			{/*		color="neutral"*/}
+			{/*		startDecorator={<KeyboardArrowLeftIcon/>}*/}
+			{/*	>*/}
+			{/*		Previous*/}
+			{/*	</Button>*/}
 
-				<Box sx={{flex: 1}}/>
-				{['1', '2', '3', '…', '8', '9', '10'].map((page) => (
-					<IconButton
-						key={page}
-						size="sm"
-						variant={Number(page) ? 'outlined' : 'plain'}
-						color="neutral"
-					>
-						{page}
-					</IconButton>
-				))}
-				<Box sx={{flex: 1}}/>
+			{/*	<Box sx={{flex: 1}}/>*/}
+			{/*	{['1', '2', '3', '…', '8', '9', '10'].map((page) => (*/}
+			{/*		<IconButton*/}
+			{/*			key={page}*/}
+			{/*			size="sm"*/}
+			{/*			variant={Number(page) ? 'outlined' : 'plain'}*/}
+			{/*			color="neutral"*/}
+			{/*		>*/}
+			{/*			{page}*/}
+			{/*		</IconButton>*/}
+			{/*	))}*/}
+			{/*	<Box sx={{flex: 1}}/>*/}
 
-				<Button
-					size="sm"
-					variant="outlined"
-					color="neutral"
-					endDecorator={<KeyboardArrowRightIcon/>}
-				>
-					Next
-				</Button>
-			</Box>
+			{/*	<Button*/}
+			{/*		size="sm"*/}
+			{/*		variant="outlined"*/}
+			{/*		color="neutral"*/}
+			{/*		endDecorator={<KeyboardArrowRightIcon/>}*/}
+			{/*	>*/}
+			{/*		Next*/}
+			{/*	</Button>*/}
+			{/*</Box>*/}
 		</React.Fragment>
 	);
 }
