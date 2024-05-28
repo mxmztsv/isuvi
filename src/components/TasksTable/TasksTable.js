@@ -55,7 +55,7 @@ export const TasksTable = ({rows, update}) => {
 	const completeTaskHandler = async (id) => {
 		// request(`/task/${id}/completed`).then((data) => {
 		// 	update()
-		// 	if (data.status.id === 1) {
+		// 	if (data.status.id === 4) {
 				toast.success('Задание завершено успешно')
 			// } else toast.error('Задание провалено')
 		// })
