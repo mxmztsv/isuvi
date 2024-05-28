@@ -20,6 +20,8 @@ import {Controller, useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 import {useHttp} from "../../hooks/http.hook";
 import {useAuthContext} from "../../context/AuthContext";
+import axios from "axios";
+import {BASE_URL} from "../../config";
 
 export const MachineLoadGraph = () => {
 	const {request} = useHttp()
@@ -36,7 +38,35 @@ export const MachineLoadGraph = () => {
 		// request('/machine/graphic', 'POST', data).then((data) => {
 		// console.log(data)
 		// })
+
+		// const body = data
+		// const headers = {}
+		// headers['Content-Type'] = 'application/json'
+		//
+		// const options = {
+		// 	responseType: 'arraybuffer',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		'Accept': 'application/csv'
+		// 	}
+		// }
+		//
+		// axios.post(BASE_URL + '/machine/graphic', body, options)
+		// 	.then((response) => {
+		// 		// console.log('response', response)
+		// 		const url = window.URL.createObjectURL(new Blob([response.data]));
+		// 		const link = document.createElement('a');
+		// 		link.href = url;
+		// 		link.setAttribute('download', `machine_load_graph.csv`);
+		// 		document.body.appendChild(link);
+		// 		link.click();
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error)
+		// 		toast.error(error.message)
+		// 	});
 	}
+
 	return (
 		<CssVarsProvider disableTransitionOnChange>
 			<CssBaseline/>
