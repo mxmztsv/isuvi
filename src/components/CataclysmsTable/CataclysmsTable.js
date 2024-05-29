@@ -44,6 +44,7 @@ import {Controller, useForm} from "react-hook-form";
 import {freeAgentsStub} from "../../pages";
 import {DialogTitle, Stack, Textarea} from "@mui/joy";
 import {useAuthContext} from "../../context/AuthContext";
+import {useHttp} from "../../hooks/http.hook";
 
 
 export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
@@ -52,6 +53,7 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 	const [selectedCataclysmId, setSelectedCataclysmId] = useState(null);
 
 	const {userData} = useAuthContext()
+	const {request} = useHttp()
 
 	const {handleSubmit, control, reset} = useForm({
 		defaultValues: {
@@ -63,9 +65,9 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 	const onSubmit = async data => {
 		const payload = {cataclysmId: selectedCataclysmId, ...data}
 		console.log(payload)
-		// request('/task', 'POST', data).then((data) => {
-		toast.success('Задание назначено')
-		// })
+		request('/task', 'POST', payload).then((data) => {
+			toast.success('Задание назначено')
+		})
 	}
 
 	const handleClose = () => {
@@ -84,19 +86,19 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 	}
 
 	const fetchFreeAgents = async () => {
-		// request('/user/free').then((data) => {
-		// 	setFreeAgents(data)
-		// })
-		setFreeAgents(freeAgentsStub)
+		request('/user/free').then((data) => {
+			setFreeAgents(data)
+		})
+		// setFreeAgents(freeAgentsStub)
 		// setFreeAgents([])
 	}
 
 
 	const deleteHandler = async (id) => {
-		// request(`/cataclysm/${id}`, 'DELETE').then(() => {
-		toast.success('Катаклизм удален')
-		update();
-		// })
+		request(`/cataclysm/${id}`, 'DELETE').then(() => {
+			toast.success('Катаклизм удален')
+			update();
+		})
 	}
 
 	useEffect(() => {
@@ -158,7 +160,7 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 								<Typography level="body-xs">{row.description}</Typography>
 							</td>
 							<td>
-								<Chip
+								{row.type && <Chip
 									variant="soft"
 									size="sm"
 									color={
@@ -170,10 +172,10 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 									}
 								>
 									{row.type.name}
-								</Chip>
+								</Chip>}
 							</td>
 							<td>
-								{ (userData.user.role.id !== 2) && <Box sx={{
+								{(userData.userDto.role.id !== 2) && <Box sx={{
 									display: 'flex',
 									gap: 1,
 									alignItems: 'center',

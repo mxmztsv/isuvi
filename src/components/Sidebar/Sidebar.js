@@ -172,8 +172,8 @@ export const Sidebar = () => {
 	}
 
 	useEffect(() => {
-		setPages(ROLES_TO_PAGES[userData.user.role.id])
-		setSelectedPage(ROLES_TO_PAGES[userData.user.role.id][0].title)
+		setPages(ROLES_TO_PAGES[userData.userDto.role.id])
+		setSelectedPage(ROLES_TO_PAGES[userData.userDto.role.id][0].title)
 	}, [userData]);
 
 
@@ -261,10 +261,10 @@ export const Sidebar = () => {
 					variant="soft"
 					size="sm"
 					color="primary"
-				>{userData.user.name.charAt(0)}</Avatar>
+				>{userData.userDto.name.charAt(0)}</Avatar>
 				<Box sx={{minWidth: 0, flex: 1}}>
-					<Typography level="title-sm">{userData.user.name}</Typography>
-					<Typography level="body-xs">{userData.user.role.name}</Typography>
+					<Typography level="title-sm">{userData.userDto.name}</Typography>
+					<Typography level="body-xs">{userData.userDto.role.name}</Typography>
 				</Box>
 				<IconButton size="sm" variant="plain" color="neutral" onClick={logoutHandler}>
 					<LogoutRoundedIcon/>

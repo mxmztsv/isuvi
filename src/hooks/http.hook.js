@@ -9,7 +9,7 @@ export const useHttp = () => {
 
 	const {userData} = useAuthContext()
 
-	const request = useCallback(async (url, method = 'GET', body = null, auth = false) => {
+	const request = useCallback(async (url, method = 'GET', body = null, auth = true) => {
 		setLoading(true)
 		try {
 
@@ -27,7 +27,7 @@ export const useHttp = () => {
 
 			if (auth) {
 				if (userData && userData.accessToken) {
-					options.headers.Token = `Bearer ${userData.accessToken}`
+					options.headers.Authorization = `Bearer ${userData.accessToken}`
 				} else throw new Error('Требуется авторизация')
 			}
 
@@ -40,7 +40,8 @@ export const useHttp = () => {
 			}
 
 			if (!response.ok) {
-				throw new Error(data.message || 'Что-то пошло не так во время выполнения запроса')
+				// toast.error(data.error)
+				throw new Error(data.error || 'Что-то пошло не так во время выполнения запроса')
 			}
 
 			setLoading(false)
@@ -50,7 +51,7 @@ export const useHttp = () => {
 			setLoading(false)
 			setError(e.message)
 			toast.error(e.message)
-			throw e
+			// throw e
 		}
 	}, [])
 

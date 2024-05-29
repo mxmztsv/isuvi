@@ -17,7 +17,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 1) { // Агент
+	if (userData.userDto.role.id === 1) { // Агент
 		return (
 			<Routes>
 				<Route path="/tasks" element={<TasksPage/>}/>
@@ -26,7 +26,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 2) { // Вариант
+	if (userData.userDto.role.id === 2) { // Вариант
 		return (
 			<Routes>
 				<Route path="/tasks" element={<TasksPage/>}/>
@@ -36,7 +36,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 3) { // Менеджер
+	if (userData.userDto.role.id === 3) { // Менеджер
 		return (
 			<Routes>
 				<Route path="/tasks-management" element={<TasksManagementPage/>}/>
@@ -46,7 +46,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 4) { // Помощник
+	if (userData.userDto.role.id === 4) { // Помощник
 		return (
 			<Routes>
 				<Route path="/tasks" element={<TasksPage/>}/>
@@ -55,7 +55,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 5) { // Управляющий станком
+	if (userData.userDto.role.id === 5) { // Управляющий станком
 		return (
 			<Routes>
 				<Route path="/machine" element={<MachinePage/>}/>
@@ -64,7 +64,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 6) { // Администратор
+	if (userData.userDto.role.id === 6) { // Администратор
 		return (
 			<Routes>
 				<Route path="/tasks-management" element={<TasksManagementPage/>}/>
@@ -76,7 +76,7 @@ export const useRoutes = (userData) => {
 		)
 	}
 
-	if (userData.user.role.id === 7) { // Dev
+	if (userData.userDto.role.id === 7) { // Dev
 		return (
 			<Routes>
 				<Route path="/tasks-management" element={<TasksManagementPage/>}/>

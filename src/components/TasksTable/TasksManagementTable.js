@@ -148,7 +148,7 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 							</td>
 							<td>
 								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'end', width: '100%'}}>
-									<IconButton variant="soft" color="primary" size="sm" onClick={() => {handleOpenEditModal(row.cataclysm.id)}}>
+									<IconButton variant="soft" color="primary" size="sm" onClick={() => {handleOpenEditModal(row.id)}}>
 										<EditRoundedIcon/>
 									</IconButton>
 								</Box>

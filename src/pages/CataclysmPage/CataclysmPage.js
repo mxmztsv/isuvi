@@ -19,6 +19,7 @@ import ModalDialog from "@mui/joy/ModalDialog";
 import {Controller, useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 import {freeAgentsStub} from "../TasksPage";
+import {useHttp} from "../../hooks/http.hook";
 
 const cataclysmsStub = [
 	{
@@ -85,6 +86,8 @@ export const CataclysmPage = () => {
 	const [cataclysms, setCataclysms] = useState([]);
 	const [selectedCataclysmId, setSelectedCataclysmId] = useState(null);
 
+	const {request} = useHttp()
+
 	const {handleSubmit, control, reset, setValue} = useForm({
 		defaultValues: {
 			place: '',
@@ -95,24 +98,31 @@ export const CataclysmPage = () => {
 	})
 
 	const onSubmit = async data => {
-		console.log(data)
+		// console.log(data)
 		// request('/cataclysm', 'POST', data).then((data) => {
-		toast.success('Катаклизм отредактирован')
+		// toast.success('Катаклизм отредактирован')
 		// })
 		if (selectedCataclysmId) {
-			// request(`/cataclysm/${selectedUserId}`, 'PUT', data).then(() => {
-			// toast.success('Катаклизм отредактирован')
-			// })
+			request(`/cataclysm/${selectedCataclysmId}`, 'PUT', data).then(() => {
+				toast.success('Катаклизм отредактирован')
+				handleClose()
+			})
+
 		} else {
-			// request('/cataclysm', 'POST', data).then(() => {
-			// toast.success('Катаклизм создан')
-			// })
+			delete data.typeId
+			const newTime = data.time + ':00'
+			data.time = newTime
+			request('/cataclysm', 'POST', data).then(() => {
+				toast.success('Катаклизм создан')
+				handleClose()
+			})
 		}
 		console.log('selectedCataclysmId', selectedCataclysmId)
 		console.log(data)
 	}
 
 	const handleClose = () => {
+		fetchCataclysms()
 		setSelectedCataclysmId(null)
 		setOpenEditModal(false)
 		reset()
@@ -125,30 +135,30 @@ export const CataclysmPage = () => {
 	}
 
 	const fetchFreeAgents = async () => {
-		// request('/user/free').then((data) => {
-		// 	setFreeAgents(data)
-		// })
-		setFreeAgents(freeAgentsStub)
+		request('/user/free').then((data) => {
+			setFreeAgents(data)
+		})
+		// setFreeAgents(freeAgentsStub)
 	}
 
 	const fetchCataclysms = async () => {
-		// request('/cataclysm').then((data) => {
-		// 	setTasks(data)
-		// })
-		setCataclysms(cataclysmsStub)
+		request('/cataclysm?page=0&limit=10').then((data) => {
+			setCataclysms(data)
+		})
+		// setCataclysms(cataclysmsStub)
 	}
 
 	const fetchCataclysm = async (id) => {
-		// request(`/cataclysm/${id}`).then((data) => {
-		// 	    setValue("description", data.description)
-		// 		setValue("place", data.place)
-		// 		setValue("time", data.time)
-		// 		setValue("typeId", data.type.id)
-		// })
-		setValue("description", cataclysmsStub[0].description)
-		setValue("place", cataclysmsStub[0].place)
-		setValue("time", cataclysmsStub[0].time)
-		setValue("typeId", cataclysmsStub[0].type.id)
+		request(`/cataclysm/${id}`).then((data) => {
+			setValue("description", data.description)
+			setValue("place", data.place)
+			setValue("time", data.time)
+			if (data.type) setValue("typeId", data.type.id)
+		})
+		// setValue("description", cataclysmsStub[0].description)
+		// setValue("place", cataclysmsStub[0].place)
+		// setValue("time", cataclysmsStub[0].time)
+		// setValue("typeId", cataclysmsStub[0].type.id)
 	}
 
 
@@ -205,7 +215,8 @@ export const CataclysmPage = () => {
 							Добавить катаклизм
 						</Button>
 					</Box>
-					<CataclysmsTable rows={cataclysmsStub} handleOpenEditModal={handleOpenEditModal} update={fetchCataclysms}/>
+					<CataclysmsTable rows={cataclysms} handleOpenEditModal={handleOpenEditModal}
+					                 update={fetchCataclysms}/>
 					{/*<OrderList listItems={orders}/> TODO: адаптив*/}
 					<Modal open={openEditModal} onClose={handleClose} variant="soft">
 						<ModalDialog>
@@ -240,7 +251,8 @@ export const CataclysmPage = () => {
 										render={({field: {onChange, value}}) => (
 											<FormControl>
 												<FormLabel>Время</FormLabel>
-												<Input type="time" autoFocus required value={value} onChange={onChange}/>
+												<Input type="time" autoFocus required value={value}
+												       onChange={onChange}/>
 											</FormControl>
 										)}
 									/>
@@ -252,11 +264,12 @@ export const CataclysmPage = () => {
 										render={({field: {onChange, value}}) => (
 											<FormControl>
 												<FormLabel>Описание</FormLabel>
-												<Textarea minRows={3} autoFocus required value={value} onChange={onChange}/>
+												<Textarea minRows={3} autoFocus required value={value}
+												          onChange={onChange}/>
 											</FormControl>
 										)}
 									/>
-									<Controller
+									{selectedCataclysmId && <Controller
 										name={"typeId"}
 										rules={{required: true}}
 										fullwidth
@@ -277,7 +290,7 @@ export const CataclysmPage = () => {
 												</Select>
 											</FormControl>
 										)}
-									/>
+									/>}
 									<Stack direction="row" spacing={2}>
 										<Button type="submit" variant="soft">Сохранить</Button>
 										<Button color="danger" variant="soft" onClick={handleClose}>Отмена</Button>

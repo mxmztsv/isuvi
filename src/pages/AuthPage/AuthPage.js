@@ -29,28 +29,28 @@ export const AuthPage = () => {
 	const {handleSubmit, control, reset} = useForm({
 		defaultValues: {
 			login: '',
-			password: ''
+			pass: ''
 		}
 	})
 
 	const onSubmit = async data => {
 		console.log(data)
-		// request('/auth/login', 'POST', data).then((userData) => {
-		// 	login(userData)
-			login({
-				accessToken: "string",
-				authToken: "string",
-				user: {
-					"id": 1,
-					"login": "test_login",
-					"name": "Максим",
-					"role": {
-						"id": 7,
-						"name": "Разработчик"
-					}
-				}
-			})
-		// })
+		request('/auth/login', 'POST', data, false).then((userData) => {
+			login(userData)
+		// 	login({
+		// 		accessToken: "string",
+		// 		accessToken: "string",
+		// 		user: {
+		// 			"id": 1,
+		// 			"login": "test_login",
+		// 			"name": "Максим",
+		// 			"role": {
+		// 				"id": 7,
+		// 				"name": "Разработчик"
+		// 			}
+		// 		}
+		// 	})
+		})
 	}
 
 	return (
@@ -87,7 +87,8 @@ export const AuthPage = () => {
 							<FormControl>
 								<FormLabel>Логин</FormLabel>
 								<Input
-									// html input attribute
+									name="login"
+									type="login"
 									onChange={onChange}
 									value={value}
 									placeholder="johndoe@email.com"
@@ -96,7 +97,7 @@ export const AuthPage = () => {
 						)}
 					/>
 					<Controller
-						name={"password"}
+						name={"pass"}
 						required
 						fullWidth
 						control={control}

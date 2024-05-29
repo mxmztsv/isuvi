@@ -1,2 +1,2 @@
-export const BASE_URL = 'https://bbausl29tbkte172jkdb.containers.yandexcloud.net/api/v1'
+export const BASE_URL = 'http://158.160.170.213:20001/api/v1'
 export const STORAGE_NAME = 'isuviUserData'

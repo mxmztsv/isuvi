@@ -79,67 +79,71 @@ export const UsersPage = () => {
 	})
 
 	const fetchRoles = async () => {
-		// request('/role').then((data) => {
-		// 	setRoles(data)
-		// })
-		setRoles([
-			{
-				"id": 1,
-				"name": "Агент"
-			},
-			{
-				"id": 2,
-				"name": "Вариант"
-			},
-			{
-				"id": 3,
-				"name": "Менеджер"
-			},
-			{
-				"id": 4,
-				"name": "Помощник"
-			},
-			{
-				"id": 5,
-				"name": "Управляющий станком"
-			},
-			{
-				"id": 6,
-				"name": "Администратор"
-			},
-		])
+		request('/role').then((data) => {
+			setRoles(data)
+		})
+		// setRoles([
+		// 	{
+		// 		"id": 1,
+		// 		"name": "Агент"
+		// 	},
+		// 	{
+		// 		"id": 2,
+		// 		"name": "Вариант"
+		// 	},
+		// 	{
+		// 		"id": 3,
+		// 		"name": "Менеджер"
+		// 	},
+		// 	{
+		// 		"id": 4,
+		// 		"name": "Помощник"
+		// 	},
+		// 	{
+		// 		"id": 5,
+		// 		"name": "Управляющий станком"
+		// 	},
+		// 	{
+		// 		"id": 6,
+		// 		"name": "Администратор"
+		// 	},
+		// ])
 	}
 
 	const fetchUsers = async () => {
-		// request('/user').then((data) => {
-		// 	setUsers(data)
-		// })
-		setUsers(stub)
+		request('/user?page=0&limit=10').then((data) => {
+			setUsers(data)
+		})
+		// setUsers(stub)
 	}
 
 	const fetchUser = async (id) => {
-		// request(`/user/${id}`).then((data) => {
-		// 	setValue("login", data.login)
-		// 	setValue("password", data.password)
-		// 	setValue("name", data.name)
-		// 	setValue("role", data.role.id)
-		// })
-		setValue("login", stub[0].login)
-		setValue("password", stub[0].password)
-		setValue("name", stub[0].name)
-		setValue("roleId", stub[0].role.id)
+		request(`/user/${id}`).then((data) => {
+			setValue("login", data.login)
+			setValue("password", data.password)
+			setValue("name", data.name)
+			setValue("roleId", data.role.id)
+		})
+		// setValue("login", stub[0].login)
+		// setValue("password", stub[0].password)
+		// setValue("name", stub[0].name)
+		// setValue("roleId", stub[0].role.id)
 	}
 
 	const onSubmit = async data => {
 		if (selectedUserId) {
 			if (data.password === null) delete data.password
-			// request(`/user/${selectedUserId}`, 'PUT', data).then(() => {
-			// toast.success('Пользователь отредактирован')
-			// })
+			request(`/user/${selectedUserId}`, 'PUT', data).then(() => {
+				toast.success('Пользователь отредактирован')
+				fetchUsers()
+				handleClose()
+			})
 		} else {
-			// request('/user', 'POST', data).then(() => {
-			// toast.success('Пользователь создан')
-			// })
+			request('/user', 'POST', data).then(() => {
+				toast.success('Пользователь создан')
+				fetchUsers()
+				handleClose()
+			})
 		}
 		console.log('selectedUserId', selectedUserId)
 		console.log(data)

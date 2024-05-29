@@ -18,6 +18,7 @@ import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import {Controller, useForm} from "react-hook-form";
 import toast from "react-hot-toast";
+import {useHttp} from "../../hooks/http.hook";
 
 export const freeAgentsStub = [
 	{
@@ -65,6 +66,8 @@ export const TasksManagementPage = () => {
 	const [tasks, setTasks] = useState([]);
 	const [selectedCataclysmId, setSelectedCataclysmId] = useState(null);
 
+	const {request} = useHttp()
+
 	const {handleSubmit, control, reset, setValue} = useForm({
 		defaultValues: {
 			description: '',
@@ -75,14 +78,15 @@ export const TasksManagementPage = () => {
 	const onSubmit = async data => {
 		const payload = {cataclysmId: selectedCataclysmId, ...data}
 		console.log(payload)
-		// request('/account/sign-in', 'POST', data).then((userData) => {
-		// 	login(userData)
+		request(`/task/${selectedCataclysmId}`, 'PUT', payload).then(() => {
 			toast.success('Задание отредактировано')
-		// })
+			handleClose()
+		})
 	}
 
 	const handleClose = () => {
 		setSelectedCataclysmId(null)
+		fetchTasks()
 		setOpen(false)
 		reset()
 	}
@@ -94,26 +98,27 @@ export const TasksManagementPage = () => {
 	}
 
 	const fetchFreeAgents = async () => {
-		// request('/user/free').then((data) => {
-		// 	setFreeAgents(data)
-		// })
-		setFreeAgents(freeAgentsStub)
+		request('/user/free').then((data) => {
+			setFreeAgents(data)
+		})
+		// setFreeAgents(freeAgentsStub)
 	}
 
 	const fetchTasks = async () => {
-		// request('/task').then((data) => {
-		// 	setTasks(data)
-		// })
-		setTasks(tasksStub)
+		request('/task?page=0&limit=10').then((data) => {
+			setTasks(data)
+		})
+		// setTasks(tasksStub)
 	}
 
 	const fetchTask = async (id) => {
-		// request(`/task/${id}`).then((data) => {
-		// 	setValue("description", data.description)
-		// 	setValue("executorId", data.executor.id)
-		// })
-		setValue("description", tasksStub[0].description)
-		setValue("executorId", tasksStub[0].executor.id)
+		request(`/task/${id}`).then((data) => {
+			console.log(data)
+			setValue("description", data.description)
+			setValue("executorId", data.executor.id)
+		})
+		// setValue("description", tasksStub[0].description)
+		// setValue("executorId", tasksStub[0].executor.id)
 	}
 
 

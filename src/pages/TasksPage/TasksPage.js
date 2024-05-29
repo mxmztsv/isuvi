@@ -64,10 +64,10 @@ export const TasksPage = () => {
 	const {request} = useHttp()
 
 	const fetchTasks = async () => {
-		// request('/task').then((data) => {
-		// 	setTasks(data)
-		// })
-		setTasks(tasksStub)
+		request('/task?page=0&limit=10').then((data) => {
+			setTasks(data)
+		})
+		// setTasks(tasksStub)
 	}
 
 	useEffect(() => {
