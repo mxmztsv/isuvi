@@ -46,19 +46,19 @@ export const TasksTable = ({rows, update}) => {
 	const {request} = useHttp()
 
 	const startTaskHandler = async (id) => {
-		// request(`/task/${id}/start`).then(() => {
-		// 	update()
+		request(`/task/${id}/start`, 'PUT').then(() => {
+			update()
 			toast.success('Задание начато')
-		// })
+		})
 	}
 
 	const completeTaskHandler = async (id) => {
-		// request(`/task/${id}/completed`).then((data) => {
-		// 	update()
-		// 	if (data.status.id === 4) {
+		request(`/task/${id}/completed`, 'PUT').then((data) => {
+			update()
+			if (data.status.id === 4) {
 				toast.success('Задание завершено успешно')
-			// } else toast.error('Задание провалено')
-		// })
+			} else toast.error('Задание провалено')
+		})
 	}
 
 	return (
@@ -177,7 +177,7 @@ export const TasksTable = ({rows, update}) => {
 								</td>
 
 								<td>
-									<Chip
+									{row.cataclysm.type && <Chip
 										variant="soft"
 										size="sm"
 										color={
@@ -189,7 +189,7 @@ export const TasksTable = ({rows, update}) => {
 										}
 									>
 										{row.cataclysm.type.name}
-									</Chip>
+									</Chip>}
 								</td>
 								<td>
 									<Box sx={{

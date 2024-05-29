@@ -110,13 +110,13 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 								</Chip>
 							</td>
 							<td>
-								<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
+								{row.cataclysm && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
 									<PlaceRoundedIcon fontSize="small"/>
 									<Typography level="body-xs">{row.cataclysm.place}</Typography>
-								</Box>
+								</Box>}
 							</td>
 							<td>
-								<Typography level="body-xs">{row.cataclysm.time}</Typography>
+								{row.cataclysm && <Typography level="body-xs">{row.cataclysm.time}</Typography>}
 							</td>
 							<td>
 								<Typography level="body-xs">{row.description}</Typography>
@@ -132,7 +132,7 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 							</td>
 
 							<td>
-								<Chip
+								{row.cataclysm && row.cataclysm.type && <Chip
 									variant="soft"
 									size="sm"
 									color={
@@ -144,7 +144,7 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 									}
 								>
 									{row.cataclysm.type.name}
-								</Chip>
+								</Chip>}
 							</td>
 							<td>
 								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'end', width: '100%'}}>
