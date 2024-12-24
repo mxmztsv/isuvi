@@ -1,5 +1,6 @@
 import {useRoutes} from "./routes";
-import {BrowserRouter as Router} from "react-router-dom";
+// import {BrowserRouter as Router} from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
 import {Toaster} from "react-hot-toast"
 import {useAuthContext} from "./context/AuthContext";
 import {useEffect} from "react";
@@ -22,6 +23,9 @@ function App() {
 			<Toaster
 				position="bottom-right"
 				reverseOrder={false}
+				toastOptions={{
+					duration: 3000
+				}}
 			/>
 			<Router>
 				{userData && <Sidebar/>}

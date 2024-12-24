@@ -38,7 +38,7 @@ export const AuthPage = () => {
 		request('/auth/login', 'POST', data, false).then((userData) => {
 			login(userData)
 		// 	login({
-		// 		accessToken: "string",
+		// 		// accessToken: "string",
 		// 		accessToken: "string",
 		// 		user: {
 		// 			"id": 1,
