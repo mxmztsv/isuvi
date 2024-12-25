@@ -42,7 +42,7 @@ import toast from "react-hot-toast";
 import {useEffect, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {freeAgentsStub} from "../../pages";
-import {DialogTitle, Stack, Textarea} from "@mui/joy";
+import {DialogTitle, Stack, Textarea, Tooltip} from "@mui/joy";
 import {useAuthContext} from "../../context/AuthContext";
 import {useHttp} from "../../hooks/http.hook";
 
@@ -137,6 +137,7 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 						<th style={{padding: '12px 12px'}}>Место</th>
 						<th style={{padding: '12px 12px'}}>Время</th>
 						<th style={{padding: '12px 12px'}}>Описание</th>
+						<th style={{padding: '12px 12px'}}>Стоимость ресурсов</th>
 						<th style={{padding: '12px 12px'}}>Тип</th>
 						<th style={{padding: '12px 12px'}}></th>
 					</tr>
@@ -148,16 +149,19 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 								<Typography level="body-xs">{row.id}</Typography>
 							</td>
 							<td>
-								<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
+								{row.place && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
 									<PlaceRoundedIcon fontSize="small"/>
 									<Typography level="body-xs">{row.place}</Typography>
-								</Box>
+								</Box>}
 							</td>
 							<td>
 								<Typography level="body-xs">{row.time}</Typography>
 							</td>
 							<td>
 								<Typography level="body-xs">{row.description}</Typography>
+							</td>
+							<td>
+								<Typography level="body-xs">${row.costOfResources}</Typography>
 							</td>
 							<td>
 								{row.type && <Chip
