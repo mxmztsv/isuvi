@@ -23,6 +23,14 @@ import {MachineBufferSetting, MachineLoadGraph, MachineTimeSetting} from "../../
 
 export const MachinePage = () => {
 
+	const {request} = useHttp()
+
+	const flushTimelines = () => {
+		request('/machine/destroy/all', 'DELETE').then(() => {
+			toast.success('Все таймлайны очищены')
+		})
+	}
+
 
 	return (
 		<CssVarsProvider disableTransitionOnChange>
@@ -53,6 +61,8 @@ export const MachinePage = () => {
 					</Typography>
 					<MachineBufferSetting/>
 					<MachineTimeSetting/>
+					<Button onClick={flushTimelines} color="danger" variant="soft"
+					        sx={{position: 'absolute', bottom: '30px'}}>Очистить все таймлайны</Button>
 				</Box>
 			</Box>
 			{/*<Stack direction="column">*/}
