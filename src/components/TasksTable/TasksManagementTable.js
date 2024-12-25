@@ -69,7 +69,7 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 				>
 					<thead>
 					<tr>
-						<th style={{padding: '12px 12px'}}>Статус</th>
+						<th style={{padding: '12px 12px', width: '16%'}}>Статус</th>
 						<th style={{padding: '12px 12px'}}>Место</th>
 						<th style={{padding: '12px 12px'}}>Время</th>
 						<th style={{padding: '12px 12px'}}>Катаклизм</th>
@@ -110,7 +110,7 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 								</Chip>
 							</td>
 							<td>
-								{row.cataclysm && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
+								{row.cataclysm.place && row.cataclysm && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
 									<PlaceRoundedIcon fontSize="small"/>
 									<Typography level="body-xs">{row.cataclysm.place}</Typography>
 								</Box>}

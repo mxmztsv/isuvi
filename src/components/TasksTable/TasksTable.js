@@ -23,6 +23,7 @@ import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import Dropdown from '@mui/joy/Dropdown';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
@@ -61,6 +62,16 @@ export const TasksTable = ({rows, update}) => {
 		})
 	}
 
+	const collectResources = async (id) => {
+		request(`/task/${id}/collect`, 'PUT').then((data) => {
+			update()
+			console.log(data)
+			if (data?.status.id === 6) {
+				toast.success(`Timeline был ограблен. Собранно ресурсов на сумму $${data.cataclysm.costOfResources}`)
+			} else toast.error('Не удалось ограбить timeline')
+		})
+	}
+
 	return (
 		<React.Fragment>
 			<Sheet
@@ -89,7 +100,7 @@ export const TasksTable = ({rows, update}) => {
 				>
 					<thead>
 					<tr>
-						<th style={{padding: '12px 12px'}}>Статус</th>
+						<th style={{padding: '12px 12px', width: '16%'}}>Статус</th>
 						<th style={{padding: '12px 12px'}}>Место</th>
 						<th style={{padding: '12px 12px'}}>Время</th>
 						<th style={{padding: '12px 12px'}}>Катаклизм</th>
@@ -120,12 +131,13 @@ export const TasksTable = ({rows, update}) => {
 									</Button>
 								)
 							}
-							if (row.status.id === 4) {
+							if (row.status.id === 5) {
 								return (
-									<Button color="primary" size="sm" disabled onClick={() => {
+									<IconButton color="success" variant="soft" size="sm" onClick={() => {
+										collectResources(row.id)
 									}}>
-										Собрать ресурсы
-									</Button>
+										<AttachMoneyIcon/>
+									</IconButton>
 								)
 							} else return null
 						}
@@ -161,10 +173,11 @@ export const TasksTable = ({rows, update}) => {
 									</Chip>
 								</td>
 								<td>
-									<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
+									{row.cataclysm.place && <Box
+										sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
 										<PlaceRoundedIcon fontSize="small"/>
 										<Typography level="body-xs">{row.cataclysm.place}</Typography>
-									</Box>
+									</Box>}
 								</td>
 								<td>
 									<Typography level="body-xs">{row.cataclysm.time}</Typography>

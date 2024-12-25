@@ -24,7 +24,7 @@ function App() {
 				position="bottom-right"
 				reverseOrder={false}
 				toastOptions={{
-					duration: 3000
+					duration: 5000
 				}}
 			/>
 			<Router>

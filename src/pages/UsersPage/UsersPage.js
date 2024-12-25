@@ -111,7 +111,7 @@ export const UsersPage = () => {
 	}
 
 	const fetchUsers = async () => {
-		request('/user?page=0&limit=10').then((data) => {
+		request('/user?page=0&limit=30').then((data) => {
 			setUsers(data)
 		})
 		// setUsers(stub)

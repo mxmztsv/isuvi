@@ -17,18 +17,12 @@ export const MachineLoadGraph = () => {
     const onSubmit = async data => {
         console.log(data)
 
-        const url = `${BASE_URL}/report/graphic?start=${data.start}&stop=${data.stop}`
-
-        request(`/report/graphic?start=${data.start}&stop=${data.stop}`).then((res) => {
-            console.log('res', res)
-            if (res) {
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', `machine_load_graph.csv`);
-                document.body.appendChild(link);
-                link.click();
-            }
-        })
+        const url = `http://localhost:20005/api/v1/report/graphic?start=${data.start}&stop=${data.stop}`
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `machine_load_graph.csv`);
+        document.body.appendChild(link);
+        link.click();
     }
 
     return (

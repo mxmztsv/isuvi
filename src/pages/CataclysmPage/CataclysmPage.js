@@ -142,7 +142,7 @@ export const CataclysmPage = () => {
 	}
 
 	const fetchCataclysms = async () => {
-		request('/cataclysm?page=0&limit=10').then((data) => {
+		request('/cataclysm?page=0&limit=30').then((data) => {
 			setCataclysms(data)
 		})
 		// setCataclysms(cataclysmsStub)

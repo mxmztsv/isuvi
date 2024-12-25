@@ -66,8 +66,9 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 		const payload = {cataclysmId: selectedCataclysmId, ...data}
 		console.log(payload)
 		request('/task', 'POST', payload).then((data) => {
-			toast.success('Задание назначено')
+			if (data) toast.success('Задание назначено')
 		})
+		handleClose()
 	}
 
 	const handleClose = () => {
@@ -103,7 +104,7 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 
 	useEffect(() => {
 		fetchFreeAgents();
-	}, []);
+	}, [open]);
 
 	return (
 		<React.Fragment>

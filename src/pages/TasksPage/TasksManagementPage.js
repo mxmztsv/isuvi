@@ -105,7 +105,7 @@ export const TasksManagementPage = () => {
 	}
 
 	const fetchTasks = async () => {
-		request('/task?page=0&limit=10').then((data) => {
+		request('/task?page=0&limit=30').then((data) => {
 			setTasks(data)
 		})
 		// setTasks(tasksStub)
