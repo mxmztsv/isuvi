@@ -20,6 +20,7 @@ import {Controller, useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 import {freeAgentsStub} from "../TasksPage";
 import {useHttp} from "../../hooks/http.hook";
+import {useAuthContext} from "../../context/AuthContext";
 
 const cataclysmsStub = [
 	{
@@ -87,6 +88,7 @@ export const CataclysmPage = () => {
 	const [selectedCataclysmId, setSelectedCataclysmId] = useState(null);
 
 	const {request} = useHttp()
+	const {userData} = useAuthContext()
 
 	const {handleSubmit, control, reset, setValue} = useForm({
 		defaultValues: {
@@ -205,15 +207,15 @@ export const CataclysmPage = () => {
 						<Typography level="h2" component="h1">
 							Катаклизмы
 						</Typography>
-						<Button
+						{((userData.userDto.role.id !== 3) && (userData.userDto.role.id !== 6)) && <Button
 							color="primary"
 							startDecorator={<Add/>}
 							size="sm"
 							variant="soft"
 							onClick={() => setOpenEditModal(true)}
 						>
-							Добавить катаклизм
-						</Button>
+							Создать катаклизм
+						</Button>}
 					</Box>
 					<CataclysmsTable rows={cataclysms} handleOpenEditModal={handleOpenEditModal}
 					                 update={fetchCataclysms}/>

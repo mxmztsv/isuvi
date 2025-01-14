@@ -17,7 +17,9 @@ export const MachineTimeSetting = () => {
         console.log(data)
         request(`/machine/clear/time?duration=${data.duration}`, 'PUT').then((data) => {
             console.log(data)
-            toast.success('Настройки обновлены')
+            if (data !== undefined) {
+                toast.success('Настройки обновлены')
+            }
         })
     }
 
@@ -35,8 +37,10 @@ export const MachineTimeSetting = () => {
                         <FormControl>
                             <FormLabel>Время очистки</FormLabel>
                             <Input
+                                required
                                 onChange={onChange}
                                 value={value}
+                                placeholder="30S"
                             />
                         </FormControl>
                     )}

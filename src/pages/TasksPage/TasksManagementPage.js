@@ -121,10 +121,14 @@ export const TasksManagementPage = () => {
 		// setValue("executorId", tasksStub[0].executor.id)
 	}
 
-
-	useEffect(() => {
+	const update = () => {
 		fetchFreeAgents();
 		fetchTasks()
+	}
+
+
+	useEffect(() => {
+		update()
 	}, []);
 
 
@@ -177,7 +181,7 @@ export const TasksManagementPage = () => {
 						{/*	Создать задание*/}
 						{/*</Button>*/}
 					</Box>
-					<TasksManagementTable rows={tasks} handleOpenEditModal={handleOpen}/>
+					<TasksManagementTable rows={tasks} handleOpenEditModal={handleOpen} update={update}/>
 					{/*<OrderList listItems={orders}/> TODO: адаптив*/}
 					<Modal open={open} onClose={handleClose} variant="soft">
 						<ModalDialog>
@@ -208,11 +212,13 @@ export const TasksManagementPage = () => {
 										name={"executorId"}
 										rules={{required: true}}
 										fullwidth
+										required
 										control={control}
 										render={({field: {onChange, value}}) => (
-											<FormControl fullwidth>
+											<FormControl fullwidth required>
 												<FormLabel>Исполнитель</FormLabel>
 												<Select
+													required
 													onChange={(e, newValue) => {
 														onChange(newValue);
 													}}

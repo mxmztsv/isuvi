@@ -37,9 +37,21 @@ import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import PaidRoundedIcon from '@mui/icons-material/PaidRounded';
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import toast from "react-hot-toast";
+import {useHttp} from "../../hooks/http.hook";
 
 
-export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
+export const TasksManagementTable = ({rows, handleOpenEditModal, update}) => {
+
+	const {request} = useHttp()
+
+	const deleteHandler = async (id) => {
+		request(`/task/${id}`, 'DELETE').then(() => {
+			toast.success('Задание удалено')
+			update();
+		})
+	}
 
 	return (
 		<React.Fragment>
@@ -147,9 +159,14 @@ export const TasksManagementTable = ({rows, handleOpenEditModal}) => {
 								</Chip>}
 							</td>
 							<td>
-								<Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'end', width: '100%'}}>
+								<Box sx={{display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'end', width: '100%'}}>
 									<IconButton variant="soft" color="primary" size="sm" onClick={() => {handleOpenEditModal(row.id)}}>
 										<EditRoundedIcon/>
+									</IconButton>
+									<IconButton variant="soft" color="danger" size="sm" onClick={() => {
+										deleteHandler(row.id)
+									}}>
+										<DeleteRoundedIcon/>
 									</IconButton>
 								</Box>
 							</td>

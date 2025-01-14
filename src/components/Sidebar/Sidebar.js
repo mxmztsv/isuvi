@@ -70,11 +70,11 @@ export const ROLES_TO_PAGES = {
 			icon: <SyncProblemRoundedIcon/>,
 			link: "/cataclysms"
 		},
-		{
-			title: "Задания",
-			icon: <AssignmentRoundedIcon/>,
-			link: "/tasks"
-		},
+		// {
+		// 	title: "Задания",
+		// 	icon: <AssignmentRoundedIcon/>,
+		// 	link: "/tasks"
+		// },
 	],
 	3: [
 		{
@@ -94,6 +94,11 @@ export const ROLES_TO_PAGES = {
 			icon: <AssignmentRoundedIcon/>,
 			link: "/tasks"
 		},
+		{
+			title: "Катаклизмы",
+			icon: <SyncProblemRoundedIcon/>,
+			link: "/cataclysms"
+		},
 	],
 	5: [
 		{
@@ -108,21 +113,21 @@ export const ROLES_TO_PAGES = {
 			icon: <PeopleOutlineRoundedIcon/>,
 			link: "/users"
 		},
-		{
-			title: "Задания",
-			icon: <AssignmentRoundedIcon/>,
-			link: "/tasks-management"
-		},
+		// {
+		// 	title: "Задания",
+		// 	icon: <AssignmentRoundedIcon/>,
+		// 	link: "/tasks-management"
+		// },
 		{
 			title: "Катаклизмы",
 			icon: <SyncProblemRoundedIcon/>,
 			link: "/cataclysms"
 		},
-		{
-			title: "Станок",
-			icon: <PrecisionManufacturingRoundedIcon/>,
-			link: "/machine"
-		},
+		// {
+		// 	title: "Станок",
+		// 	icon: <PrecisionManufacturingRoundedIcon/>,
+		// 	link: "/machine"
+		// },
 	],
 	7: [
 		{

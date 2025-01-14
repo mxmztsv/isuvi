@@ -75,6 +75,7 @@ export const MachineLoadGraph = () => {
                                 <FormControl>
                                     <FormLabel>Дата начала</FormLabel>
                                     <Input
+                                        required
                                         type="date"
                                         onChange={onChange}
                                         value={value}
@@ -91,6 +92,7 @@ export const MachineLoadGraph = () => {
                                 <FormControl>
                                     <FormLabel>Дата окончания</FormLabel>
                                     <Input
+                                        required
                                         type="date"
                                         onChange={onChange}
                                         value={value}

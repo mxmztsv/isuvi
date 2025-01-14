@@ -261,13 +261,15 @@ export const UsersPage = () => {
 									<Controller
 										name={"password"}
 										// rules={{required: true}}
-										// required
+										required
 										fullwidth
 										control={control}
 										render={({field: {onChange, value}}) => (
 											<FormControl>
 												<FormLabel>Пароль</FormLabel>
 												<Input autoFocus value={value}
+												       required
+												       type="password"
 												       onChange={onChange}/>
 											</FormControl>
 										)}

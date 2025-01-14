@@ -16,8 +16,10 @@ export const MachineBufferSetting = () => {
     const onSubmit = async data => {
         console.log(data)
         request(`/machine/buffer/size?buffer=${data.buffer}`, 'PUT').then((data) => {
-            console.log(data)
-            toast.success('Настройки обновлены')
+            console.log('data', data)
+            if (data !== undefined) {
+                toast.success('Настройки обновлены')
+            }
         })
     }
 
@@ -35,8 +37,10 @@ export const MachineBufferSetting = () => {
                         <FormControl>
                             <FormLabel>Размер буффера</FormLabel>
                             <Input
+                                required
                                 onChange={onChange}
                                 value={value}
+                                placeholder="Введите число"
                             />
                         </FormControl>
                     )}

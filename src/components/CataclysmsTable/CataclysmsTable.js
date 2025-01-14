@@ -150,10 +150,11 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 								<Typography level="body-xs">{row.id}</Typography>
 							</td>
 							<td>
-								{row.place && <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
-									<PlaceRoundedIcon fontSize="small"/>
-									<Typography level="body-xs">{row.place}</Typography>
-								</Box>}
+								{row.place &&
+									<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '3px'}}>
+										<PlaceRoundedIcon fontSize="small"/>
+										<Typography level="body-xs">{row.place}</Typography>
+									</Box>}
 							</td>
 							<td>
 								<Typography level="body-xs">{row.time}</Typography>
@@ -192,16 +193,17 @@ export const CataclysmsTable = ({rows, handleOpenEditModal, update}) => {
 									}}>
 										<EditRoundedIcon/>
 									</IconButton>
-									<IconButton variant="soft" color="primary" size="sm" onClick={() => {
-										handleOpen(row.id)
-									}}>
-										<PersonAddRoundedIcon/>
-									</IconButton>
-									<IconButton variant="soft" color="danger" size="sm" onClick={() => {
-										deleteHandler(row.id)
-									}}>
-										<DeleteRoundedIcon/>
-									</IconButton>
+									{(userData.userDto.role.id === 3) &&
+										<IconButton variant="soft" color="primary" size="sm" onClick={() => {
+											handleOpen(row.id)
+										}}>
+											<PersonAddRoundedIcon/>
+										</IconButton>}
+									{/*<IconButton variant="soft" color="danger" size="sm" onClick={() => {*/}
+									{/*	deleteHandler(row.id)*/}
+									{/*}}>*/}
+									{/*	<DeleteRoundedIcon/>*/}
+									{/*</IconButton>*/}
 								</Box>}
 							</td>
 						</tr>

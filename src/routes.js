@@ -29,7 +29,7 @@ export const useRoutes = (userData) => {
 	if (userData.userDto.role.id === 2) { // Вариант
 		return (
 			<Routes>
-				<Route path="/tasks" element={<TasksPage/>}/>
+				{/*<Route path="/tasks" element={<TasksPage/>}/>*/}
 				<Route path="/cataclysms" element={<CataclysmPage/>}/>
 				<Route path="*" element={<Navigate to="/cataclysms" replace/>}/>
 			</Routes>
@@ -50,6 +50,7 @@ export const useRoutes = (userData) => {
 		return (
 			<Routes>
 				<Route path="/tasks" element={<TasksPage/>}/>
+				<Route path="/cataclysms" element={<CataclysmPage/>}/>
 				<Route path="*" element={<Navigate to="/tasks" replace/>}/>
 			</Routes>
 		)
@@ -67,10 +68,10 @@ export const useRoutes = (userData) => {
 	if (userData.userDto.role.id === 6) { // Администратор
 		return (
 			<Routes>
-				<Route path="/tasks-management" element={<TasksManagementPage/>}/>
+				{/*<Route path="/tasks-management" element={<TasksManagementPage/>}/>*/}
 				<Route path="/cataclysms" element={<CataclysmPage/>}/>
 				<Route path="/users" element={<UsersPage/>}/>
-				<Route path="/machine" element={<MachinePage/>}/>
+				{/*<Route path="/machine" element={<MachinePage/>}/>*/}
 				<Route path="*" element={<Navigate to="/users" replace/>}/>
 			</Routes>
 		)
